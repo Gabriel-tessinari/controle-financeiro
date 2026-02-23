@@ -2,18 +2,18 @@ import { FORMAS_PAGAMENTO } from "../../shared/types/FormaPagamento";
 import { StatusPagamento } from "../../shared/types/StatusPagamento";
 import { calcularVencimento } from "../../shared/utils/data";
 import { validar } from "../../shared/utils/validar";
-import { CompraInput } from "../models/CompraInput";
-import { CompraItemInput } from "../models/CompraItemInput";
-import { CompraPagamentoInput } from "../models/CompraPagamentoInput";
+import { VendaInput } from "../models/VendaInput";
+import { VendaItemInput } from "../models/VendaItemInput";
+import { VendaPagamentoInput } from "../models/VendaPagamentoInput";
 
-export const reqEmCompraInput = (body: any): CompraInput => {
-  validaCompra(body);
+export const reqEmVendaInput = (body: any): VendaInput => {
+  validaVenda(body);
   let valorItens: number = 0;
   let statusPagamento: StatusPagamento = "ABERTO";
 
-  const itens: CompraItemInput[] = body.itens.map(
-    (item: any, index: number): CompraItemInput => {
-      validaCompraItem(item, index);
+  const itens: VendaItemInput[] = body.itens.map(
+    (item: any, index: number): VendaItemInput => {
+      validaVendaItem(item, index);
       valorItens += item.precoUnitario * item.quantidade;
 
       return {
@@ -28,7 +28,7 @@ export const reqEmCompraInput = (body: any): CompraInput => {
   body.outrasTaxas = body.outrasTaxas ?? 0;
   const valorTotal: number = valorItens + body.frete + body.outrasTaxas;
 
-  const pagamentos: CompraPagamentoInput[] = geraCompraPagamentoLote(
+  const pagamentos: VendaPagamentoInput[] = geraVendaPagamentoLote(
     body,
     valorTotal
   );
@@ -41,7 +41,7 @@ export const reqEmCompraInput = (body: any): CompraInput => {
 
   return {
     fornecedorId: body.fornecedorId,
-    dataCompra: body.data,
+    dataVenda: body.data,
     frete: body.frete ?? 0,
     outrasTaxas: body.outrasTaxas ?? 0,
     statusPagamento,
@@ -50,13 +50,13 @@ export const reqEmCompraInput = (body: any): CompraInput => {
   };
 };
 
-function validaCompra(body: any): void {
+function validaVenda(body: any): void {
   validar(
     typeof body.fornecedorId !== "number" || body.fornecedorId <= 0,
-    "Compra: id de fornecedor inválido."
+    "Venda: id de fornecedor inválido."
   );
 
-  validar(!body.data, "Compra: data inválida.");
+  validar(!body.data, "Venda: data inválida.");
 
   validar(
     !Array.isArray(body.itens) || body.itens.length === 0,
@@ -64,31 +64,31 @@ function validaCompra(body: any): void {
   );
 }
 
-function validaCompraItem(item: any, index: number): void {
+function validaVendaItem(item: any, index: number): void {
   validar(
     typeof item.produtoVariacaoId !== "number" || item.produtoVariacaoId <= 0,
-    `Compra - Item #${index + 1}: id da variação de produto inválido.`
+    `Venda - Item #${index + 1}: id da variação de produto inválido.`
   );
 
   validar(
     typeof item.quantidade !== "number" || item.quantidade <= 0,
-    `Compra - Item #${index + 1}: quantidade inválida.`
+    `Venda - Item #${index + 1}: quantidade inválida.`
   );
 
   validar(
     typeof item.precoUnitario !== "number" || item.precoUnitario <= 0,
-    `Compra - Item #${index + 1}: preço unitário inválido.`
+    `Venda - Item #${index + 1}: preço unitário inválido.`
   );
 }
 
-function geraCompraPagamentoLote(
+function geraVendaPagamentoLote(
   body: any,
   valorTotal: number
-): CompraPagamentoInput[] {
+): VendaPagamentoInput[] {
   body.quantidadeParcelas = body.quantidadeParcelas ?? 1;
-  validaCompraPagamento(body);
+  validaVendaPagamento(body);
 
-  const pagamentos: CompraPagamentoInput[] = montaCompraPagamentoLote(
+  const pagamentos: VendaPagamentoInput[] = montaVendaPagamentoLote(
     body,
     valorTotal
   );
@@ -96,28 +96,28 @@ function geraCompraPagamentoLote(
   return pagamentos;
 }
 
-function validaCompraPagamento(body: any): void {
+function validaVendaPagamento(body: any): void {
   validar(
     body.valorPago == null || isNaN(body.valorPago) || body.valorPago < 0,
-    "Compra: Valor pago inválido."
+    "Venda: Valor pago inválido."
   );
 
   validar(
     body.quantidadeParcelas < 1,
-    "Compra: Quantidade de parcelas inválida."
+    "Venda: Quantidade de parcelas inválida."
   );
 
   validar(
     !FORMAS_PAGAMENTO.includes(body.formaPagamento),
-    "Compra: Forma de pagamento inválida."
+    "Venda: Forma de pagamento inválida."
   );
 }
 
-function montaCompraPagamentoLote(
+function montaVendaPagamentoLote(
   body: any,
   valorTotal: number
-): CompraPagamentoInput[] {
-  const pagamentos: CompraPagamentoInput[] = [];
+): VendaPagamentoInput[] {
+  const pagamentos: VendaPagamentoInput[] = [];
 
   if (body.valorPago >= valorTotal) {
     pagamentos.push({
