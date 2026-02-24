@@ -1,0 +1,12 @@
+@route = devedores
+
+# @name getDevedores
+GET {{baseUrl}}/{{route}}
+
+# @name postDevedor
+POST {{baseUrl}}/{{route}}
+Content-Type: application/json
+
+{
+  "nome": "Sandryelle"
+}

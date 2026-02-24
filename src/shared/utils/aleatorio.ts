@@ -1,12 +1,20 @@
-import { FORMAS_PAGAMENTO, FormaPagamento } from "../../compras/models/types/FormaPagamento";
-import { STATUS_PAGAMENTO, StatusPagamento } from "../../compras/models/types/StatusPagamento";
-import { STATUS_PARCELA, StatusParcela } from "../../compras/models/types/StatusParcela";
-import { MOVIMENTACAO_ORIGEM, MovimentacaoOrigem } from "../../movimentacoes/models/types/MovimentacaoOrigem";
-import { MOVIMENTACAO_TIPO, MovimentacaoTipo } from "../../movimentacoes/models/types/MovimentacaoTipo";
+import {
+  MOVIMENTACAO_ORIGEM,
+  MovimentacaoOrigem,
+} from "../../movimentacoes/models/types/MovimentacaoOrigem";
+import {
+  MOVIMENTACAO_TIPO,
+  MovimentacaoTipo,
+} from "../../movimentacoes/models/types/MovimentacaoTipo";
+import { FORMAS_PAGAMENTO, FormaPagamento } from "../types/FormaPagamento";
+import { STATUS_PAGAMENTO, StatusPagamento } from "../types/StatusPagamento";
+import { STATUS_PARCELA, StatusParcela } from "../types/StatusParcela";
 
 export class Aleatorios {
-  static getString(prefix = 'Item', length = 5): string {
-    const random: string = Math.random().toString(36).substring(2, 2 + length);
+  static getString(prefix = "Item", length = 5): string {
+    const random: string = Math.random()
+      .toString(36)
+      .substring(2, 2 + length);
     return `${prefix}-${random}`;
   }
 
@@ -23,12 +31,12 @@ export class Aleatorios {
     return Math.random() >= 0.5;
   }
 
-  static getDataString(inicio = '2024-01-01', fim = '2025-12-31'): string {
+  static getDataString(inicio = "2024-01-01", fim = "2025-12-31"): string {
     const start: number = new Date(inicio).getTime();
     const end: number = new Date(fim).getTime();
     const randomTime: number = start + Math.random() * (end - start);
     const randomDate = new Date(randomTime);
-    return randomDate.toISOString().split('T')[0];
+    return randomDate.toISOString().split("T")[0];
   }
 
   static getFormaPagamento(): FormaPagamento {
@@ -52,7 +60,9 @@ export class Aleatorios {
   }
 
   static getMovimentacaoOrigem(): MovimentacaoOrigem {
-    const index: number = Math.floor(Math.random() * MOVIMENTACAO_ORIGEM.length);
+    const index: number = Math.floor(
+      Math.random() * MOVIMENTACAO_ORIGEM.length
+    );
     return MOVIMENTACAO_ORIGEM[index];
   }
 }

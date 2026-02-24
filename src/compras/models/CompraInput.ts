@@ -1,6 +1,6 @@
+import { StatusPagamento } from "../../shared/types/StatusPagamento";
 import { CompraItemInput } from "./CompraItemInput";
 import { CompraPagamentoInput } from "./CompraPagamentoInput";
-import { StatusPagamento } from "./types/StatusPagamento";
 
 export interface CompraInput {
   fornecedorId: number;

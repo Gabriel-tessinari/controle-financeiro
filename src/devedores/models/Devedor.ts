@@ -1,4 +1,4 @@
-export interface Categoria {
+export interface Devedor {
   id: number;
   nome: string;
 }
