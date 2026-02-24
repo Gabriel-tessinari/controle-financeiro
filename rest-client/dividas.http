@@ -1,0 +1,28 @@
+@route = dividas
+
+# @name getDividasByDevedor
+GET {{baseUrl}}/{{route}}/devedor/1
+
+###
+# @name postDivida
+POST {{baseUrl}}/{{route}}
+Content-Type: application/json
+
+{
+  "devedorId": 1,
+  "data": "2026-02-24",
+  "descricao": "Descrição teste",
+  "valor": 100.00,
+  "observacao": "Observação teste"
+}
+
+###
+# @name postDividaPagamento
+POST {{baseUrl}}/{{route}}/pagamentos
+Content-Type: application/json
+
+{
+  "dividaId": 1,
+  "data": "2026-02-24",
+  "valor": 100.00
+}
