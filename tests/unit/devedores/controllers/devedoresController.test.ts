@@ -5,7 +5,7 @@ import { listarDevedores } from "../../../../src/devedores/usecases/listarDevedo
 import { BusinessError } from "../../../../src/shared/errors/BusinessError";
 import { DevedorInputMock } from "../../../mocks/devedores/DevedorInputMock";
 import { DevedorMock } from "../../../mocks/devedores/DevedorMock";
-import { DevedorRequestMock } from "../../../mocks/devedores/devedorRequestMock";
+import { DevedorRequestMock } from "../../../mocks/devedores/DevedorRequestMock";
 
 jest.mock("../../../../src/devedores/mappers/reqEmDevedorInput");
 jest.mock("../../../../src/devedores/usecases/cadastrarDevedor");
