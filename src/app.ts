@@ -1,22 +1,17 @@
-import express, { Request, Response } from 'express';
-import catalogoRoutes from './routes/catalogo';
-import categoriasRoutes from './routes/categorias';
-import comprasRoutes from './routes/compras';
-import conjuntosRoutes from './routes/conjuntos';
-import produtosRoutes from './routes/produtos';
+import express, { Request, Response } from "express";
+import devedoresRoutes from "./routes/devedores";
+import { httpLogger } from "./shared/utils/logger";
 
 const app = express();
 app.use(express.json());
 
-// Rotas
-app.use('/catalogo', catalogoRoutes);
-app.use('/categorias', categoriasRoutes);
-app.use('/compras', comprasRoutes);
-app.use("/conjuntos", conjuntosRoutes);
-app.use('/produtos', produtosRoutes);
+app.use(httpLogger);
 
-app.get('/', (req: Request, res: Response): void => {
-  res.send('API rodando 🚀');
+// Rotas
+app.use("/devedores", devedoresRoutes);
+
+app.get("/", (req: Request, res: Response): void => {
+  res.send("API rodando 🚀");
 });
 
 const PORT = 3000;

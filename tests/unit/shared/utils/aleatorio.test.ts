@@ -1,6 +1,3 @@
-import { FORMAS_PAGAMENTO } from "../../../../src/compras/models/types/FormaPagamento";
-import { STATUS_PAGAMENTO } from "../../../../src/compras/models/types/StatusPagamento";
-import { STATUS_PARCELA } from "../../../../src/compras/models/types/StatusParcela";
 import { MOVIMENTACAO_ORIGEM } from "../../../../src/movimentacoes/models/types/MovimentacaoOrigem";
 import { MOVIMENTACAO_TIPO } from "../../../../src/movimentacoes/models/types/MovimentacaoTipo";
 import { Aleatorios } from "../../../../src/shared/utils/aleatorio";
@@ -62,24 +59,6 @@ describe("Aleatorios", () => {
   });
 
   describe("métodos de enum", () => {
-    it("getFormaPagamento deve retornar valor do array", () => {
-      const result = Aleatorios.getFormaPagamento();
-
-      expect(FORMAS_PAGAMENTO).toContain(result);
-    });
-
-    it("getStatusPagamento deve retornar valor do array", () => {
-      const result = Aleatorios.getStatusPagamento();
-
-      expect(STATUS_PAGAMENTO).toContain(result);
-    });
-
-    it("getStatusParcela deve retornar valor do array", () => {
-      const result = Aleatorios.getStatusParcela();
-
-      expect(STATUS_PARCELA).toContain(result);
-    });
-
     it("getMovimentacaoTipo deve retornar valor do array", () => {
       const result = Aleatorios.getMovimentacaoTipo();
 

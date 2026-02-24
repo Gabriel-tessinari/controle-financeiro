@@ -1,4 +1,4 @@
-# Loja
+# Controle
 
 Projeto Node.js + Express + TypeScript para gestão de caixa e estoque.
 
@@ -32,9 +32,3 @@ npm start
 ```
 
 ## Endpoints disponíveis
-
-- `GET /catalogo` → Retorna o catálogo de produtos e conjuntos
-- `GET /categorias` → Retorna lista de categorias
-- `POST /compras` → Salva uma compra com seus itens
-- `POST /conjuntos` → Salva um conjunto com seus itens
-- `POST /produtos/lote` → Salva lista de produtos com suas variações
