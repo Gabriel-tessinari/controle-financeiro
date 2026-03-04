@@ -58,6 +58,15 @@ describe("Aleatorios", () => {
     });
   });
 
+  describe("getData", () => {
+    it("deve retornar Date", () => {
+      const result = Aleatorios.getData();
+
+      expect(result).toBeInstanceOf(Date);
+      expect(result.getTime()).not.toBeNaN();
+    });
+  });
+
   describe("métodos de enum", () => {
     it("getMovimentacaoTipo deve retornar valor do array", () => {
       const result = Aleatorios.getMovimentacaoTipo();

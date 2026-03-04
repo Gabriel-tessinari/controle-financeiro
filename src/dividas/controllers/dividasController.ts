@@ -6,7 +6,7 @@ import { reqEmDividaPagamentoInput } from "../mappers/reqEmDividaPagamentoInput"
 import { DividaInput } from "../models/DividaInput";
 import { DividaPagamentoInput } from "../models/DividaPagamentoInput";
 import { cadastrarDivida } from "../usecases/cadastrarDivida";
-import { cadastrardividaPagamento } from "../usecases/cadastrarDividaPagamento";
+import { cadastrarDividaPagamento } from "../usecases/cadastrarDividaPagamento";
 import { listarDividasPorDevedor } from "../usecases/listarDividasPorDevedor";
 
 export async function getDividasByDevedor(
@@ -66,7 +66,7 @@ export async function postDividaPagamento(
   try {
     const pagamento: DividaPagamentoInput = reqEmDividaPagamentoInput(req.body);
 
-    const resultado = await cadastrardividaPagamento(pagamento);
+    const resultado = await cadastrarDividaPagamento(pagamento);
 
     logger.info({ resultado }, "Pagamento cadastrado com sucesso.");
 

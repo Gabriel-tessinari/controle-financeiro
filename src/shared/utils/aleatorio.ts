@@ -39,6 +39,13 @@ export class Aleatorios {
     return randomDate.toISOString().split("T")[0];
   }
 
+  static getData(inicio = "2024-01-01", fim = "2025-12-31"): Date {
+    const start: number = new Date(inicio).getTime();
+    const end: number = new Date(fim).getTime();
+    const randomTime: number = start + Math.random() * (end - start);
+    return new Date(randomTime);
+  }
+
   static getFormaPagamento(): FormaPagamento {
     const index: number = Math.floor(Math.random() * FORMAS_PAGAMENTO.length);
     return FORMAS_PAGAMENTO[index];
